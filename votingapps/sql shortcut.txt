@@ -1,0 +1,56 @@
+.header on
+.table on
+
+
+create table kandidat(
+	id_kandidat 	TEXT(20) PRIMARY KEY,
+	nama_kandidat 	INTEGER NOT NULL DEFAULT 0, 
+	email_kandidat 	TEXT(100)
+);
+
+
+insert into kandidat(id_kandidat,nama_kandidat,email_kandidat) values("KD01","noel","email_noel");
+insert into kandidat(id_kandidat,nama_kandidat,email_kandidat) values("KD02","fitri","email_fitri");
+insert into kandidat(id_kandidat,nama_kandidat,email_kandidat) values("KD03","nyepi","email_nyepi");
+
+create table voting(
+	id_kandidat TEXT(20),
+	waktu 		INTEGER NOT NULL DEFAULT 0
+);
+
+insert into voting(id_kandidat,waktu) values("KD01",10);
+insert into voting(id_kandidat,waktu) values("KD01",10);
+insert into voting(id_kandidat,waktu) values("KD01",10);
+insert into voting(id_kandidat,waktu) values("KD02",10);
+insert into voting(id_kandidat,waktu) values("KD02",10);
+insert into voting(id_kandidat,waktu) values("KD03",10);
+insert into voting(id_kandidat,waktu) values("KD03",10);
+insert into voting(id_kandidat,waktu) values("KD03",10);
+insert into voting(id_kandidat,waktu) values("KD01",11);
+insert into voting(id_kandidat,waktu) values("KD01",11);
+insert into voting(id_kandidat,waktu) values("KD02",11);
+insert into voting(id_kandidat,waktu) values("KD03",11);
+
+create table hasil_vote(
+	nama_kandidat TEXT(20),
+	jumlah_suara 		INTEGER NOT NULL DEFAULT 0
+);
+
+insert into hasil_vote(nama_kandidat,jumlah_suara) values("noel",15);
+insert into hasil_vote(nama_kandidat,jumlah_suara) values("fitri",10);
+insert into hasil_vote(nama_kandidat,jumlah_suara) values("nyepi",5);
+
+
+
+
+Nampilin Masing" kandidat per hari di vote berapa orang (INI SQL DARI ACCESS TAPI)
+SELECT kandidat.nama_kandidat, Count(voting.id_kandidat) AS jumlah_vote, (voting.waktu) as pukul
+FROM kandidat INNER JOIN voting ON kandidat.id_kandidat = voting.id_kandidat
+GROUP BY kandidat.nama_kandidat, (voting.waktu)
+ORDER BY Count(voting.id_kandidat) DESC;
+
+
+#Tabel buat poin di atas liat di informasi tabel.xlsx
+
+#INI KEKNYA BUAT NAMPILIN HOUR DI SQLITE
+SELECT strftime("%H",voting.waktu);
